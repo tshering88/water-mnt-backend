@@ -51,16 +51,16 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { identifier , password } = req.body;
+    const { identifier, password } = req.body;
 
     // Find by email OR username
     const user = await User.findOne({
-        $or: [{ phone: identifier  }, {cid: identifier  }],
+      $or: [{ phone: identifier }, { cid: identifier }],
     })
-    
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
-        res.status(401).json({ message: 'Invalid credentials'})
-        return
+      res.status(401).json({ message: 'Invalid credentials' })
+      return
     }
 
     const token = generateToken({ userId: user._id.toString(), phone: user.phone, cid: user.cid, role: user.role });
@@ -78,7 +78,7 @@ export const getProfile = async (req: Request, res: Response): Promise<void> => 
       res.status(401).json({ message: "Unauthorized" });
       return;
     }
-    res.status(200).json({ data: sanitizeUser(req.user), message: `Welcome back, ${req.user.name}`,});
+    res.status(200).json({ data: sanitizeUser(req.user), message: `Welcome back, ${req.user.name}`, });
   } catch (error) {
     res.status(500).json({ message: "Error fetching user", error: (error as Error).message });
   }
@@ -86,19 +86,19 @@ export const getProfile = async (req: Request, res: Response): Promise<void> => 
 
 // Get all users
 export const getUsers = async (_req: Request, res: Response): Promise<void> => {
-    try {
-        const users = await User.find().lean();
+  try {
+    const users = await User.find().lean();
 
-        // Sanitize each user in the array
-        const sanitizedUsers = users.map(user => sanitizeUser(user));
+    // Sanitize each user in the array
+    const sanitizedUsers = users.map(user => sanitizeUser(user));
 
-        res.status(200).json({
-            message: 'Users fetched successfully',
-            data: sanitizedUsers,
-        });
-    } catch (error) {
-        handleError(res, error);
-    }
+    res.status(200).json({
+      message: 'Users fetched successfully',
+      data: sanitizedUsers,
+    });
+  } catch (error) {
+    handleError(res, error);
+  }
 }
 // Update user
 
@@ -153,7 +153,7 @@ export const deleteUser = async (req: Request, res: Response): Promise<void> => 
     const { id } = req.params;
 
     if (!isValidObjectId(id, res)) return;
-   
+
 
     const deleted = await User.findByIdAndDelete(id).lean();
     if (!deleted) {

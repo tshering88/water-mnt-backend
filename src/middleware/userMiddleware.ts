@@ -4,13 +4,13 @@ import { getUserPermissions, verifyToken } from "../utils/userUtils"
 import User from '../models/userModels'
 
 
-export const authenticate = async ( req: Request, res: Response, next: NextFunction ): Promise<void> => {
+export const authenticate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        
-        const token = req.header('Authorization')?.replace('Bearer ','')
+
+        const token = req.header('Authorization')?.replace('Bearer ', '')
 
         if (!token) {
-            res.status(401).json({ message: 'Unauthorized'})
+            res.status(401).json({ message: 'Unauthorized' })
             return
         }
 
@@ -23,7 +23,7 @@ export const authenticate = async ( req: Request, res: Response, next: NextFunct
         }
 
         req.user = user
-        req.userId = user._id.toString ()
+        req.userId = user._id.toString()
 
         next()
 
@@ -37,30 +37,30 @@ export const authenticate = async ( req: Request, res: Response, next: NextFunct
 }
 
 
-export const roleBasedAccess= (
+export const roleBasedAccess = (
     requiredRoles: string[] = []) => {
     return async (
         req: Request, res: Response, next: NextFunction): Promise<void> => {
 
-            try {
-                if (!req.user) {
-                    res.status(401).json({ message: 'Unauthorized: User not found'})
-                    return
-                }
-                const userPermissions = await getUserPermissions(req.user)
-                const hasAccess = requiredRoles.some((role) =>
+        try {
+            if (!req.user) {
+                res.status(401).json({ message: 'Unauthorized: User not found' })
+                return
+            }
+            const userPermissions = await getUserPermissions(req.user)
+            const hasAccess = requiredRoles.some((role) =>
                 userPermissions.includes(role))
 
-                if (!hasAccess) {
-                    res.status(403).json({ message: 'Forbidden: Insufficient permissions'})
-                    return
-                }
-
-                next()
-            } catch (error) {
-                res.status(401).json({ message: 'Invalid permissions', error: (error as Error).message })
+            if (!hasAccess) {
+                res.status(403).json({ message: 'Forbidden: Insufficient permissions' })
+                return
             }
+
+            next()
+        } catch (error) {
+            res.status(401).json({ message: 'Invalid permissions', error: (error as Error).message })
         }
+    }
 }
 
 

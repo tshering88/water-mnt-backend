@@ -21,7 +21,7 @@ export const createGewog = async (req: Request, res: Response) => {
     const gewog = await Gewog.create({
       name,
       nameInDzongkha,
-     dzongkhag: new Types.ObjectId(dzongkhag as string), // Convert string to ObjectId
+      dzongkhag: new Types.ObjectId(dzongkhag as string), // Convert string to ObjectId
       area,
       population,
       coordinates,
