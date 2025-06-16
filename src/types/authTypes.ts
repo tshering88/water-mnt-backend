@@ -26,6 +26,11 @@ export interface IUser extends Document {
   password: string;
 }
 
+export type CoordinatesType = {
+  latitude?: number;
+  longitude?: number;
+}
+
 export type IDzongkhag = {
 
   _id?: Types.ObjectId; // optional if creating new entries
@@ -35,10 +40,7 @@ export type IDzongkhag = {
   region: RegionType;
   area?: number; // in sq km
   population?: string;
-  coordinates?: {
-    latitude?: number;
-    longitude?: number;
-  };
+  coordinates?: CoordinatesType
 };
 
 export type IGewog = {
@@ -48,10 +50,7 @@ export type IGewog = {
   dzongkhag: Types.ObjectId | IDzongkhag
   area?: number;
   population?: number;
-  coordinates?: {
-    latitude?: number;
-    longitude?: number;
-  };
+  coordinates?: CoordinatesType
 }
 
 
