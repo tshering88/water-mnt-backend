@@ -19,7 +19,7 @@ const dzongkhagSchema = new Schema({
     latitude: Number,
     longitude: Number,
   },
-  
+
 }, { timestamps: true });
 
 export default model<IDzongkhag>('Dzongkhag', dzongkhagSchema);

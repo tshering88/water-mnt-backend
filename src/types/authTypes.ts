@@ -2,13 +2,13 @@ import { Types } from 'mongoose';
 import { RegionType, UserRole } from '../utils/constant';
 
 declare global {
-    namespace Express {
-      interface Request {
-        user?: IUser & Document
-        userId?: string;
-      }
+  namespace Express {
+    interface Request {
+      user?: IUser & Document
+      userId?: string;
     }
   }
+}
 
 export type CustomJwtPayload = {
   userId: string

@@ -2,8 +2,10 @@
 import { Router } from "express";
 
 import { authenticate } from "../middleware/userMiddleware";
-import { createDzongkhag, deleteDzongkhag,
-     getDzongkhagById, getDzongkhags, updateDzongkhag } from "../controllers/DzongkhagControllers";
+import {
+     createDzongkhag, deleteDzongkhag,
+     getDzongkhagById, getDzongkhags, updateDzongkhag
+} from "../controllers/DzongkhagControllers";
 
 
 const router = Router();
