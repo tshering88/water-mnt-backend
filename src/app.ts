@@ -5,6 +5,9 @@ import userRoutes from './routes/userRoutes'
 import cors from 'cors'
 import dzongkhagRoutes from './routes/dzongkhagRoutes'
 import gewogRoutes from './routes/gewogRoutes'
+import consumerRoutes from './routes/consumerRoutes'
+
+
 
 const app = express();
 
@@ -20,6 +23,7 @@ app.use(
 app.use('/api/v1/users', userRoutes)
 app.use('/api/v1/dzongkhag', dzongkhagRoutes)
 app.use('/api/v1/gewog', gewogRoutes)
+app.use('/api/v1/consumer', consumerRoutes)
 
 // 🏠 Root route
 app.get('/', (req, res) => {

@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import { RegionType, UserRole } from '../utils/constant';
+import { ConnectionType, ConsumerStatus, RegionType, TariffCategory, UserRole } from '../utils/constant';
 
 declare global {
   namespace Express {
@@ -52,6 +52,30 @@ export type IGewog = {
   population?: number;
   coordinates?: CoordinatesType
 }
+
+
+export type IConsumer = {
+  _id?: Types.ObjectId; // optional if not yet stored
+  householdId: string;
+  householdHead: {
+    name?: string;
+    cid?: string;
+    phone?: string;
+  };
+  address: {
+    dzongkhag: Types.ObjectId;
+    gewog: Types.ObjectId;
+    village?: string;
+    houseNumber?: string;
+  };
+  familySize?: number;
+  connectionType: ConnectionType;
+  meterNumber?: string;
+  connectionDate?: Date;
+  status?: ConsumerStatus;
+  tariffCategory?: TariffCategory;
+}
+
 
 
 

@@ -1,5 +1,5 @@
 // models/dzongkhagModel.ts
-import mongoose, { model, Schema } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { RegionType } from '../utils/constant';
 import { IDzongkhag } from '../types/authTypes';
 

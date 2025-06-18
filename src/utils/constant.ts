@@ -16,3 +16,22 @@ export enum RegionType {
   SOUTHERN = 'Southern',
   EASTERN = 'Eastern',
 }
+
+export enum ConnectionType {
+  INDIVIDUAL = 'Individual',
+  SHARED = 'Shared',
+  COMMUNITY_STANDPOST = 'Community_Standpost'
+}
+
+export enum ConsumerStatus {
+  ACTIVE = 'Active',
+  DISCONNECTED = 'Disconnected',
+  SUSPENDED = 'Suspended'
+}
+
+export enum TariffCategory {
+  DOMESTIC = 'Domestic',
+  COMMERCIAL = 'Commercial',
+  INDUSTRIAL = 'Industrial',
+  INSTITUTIONAL = 'Institutional'
+}
